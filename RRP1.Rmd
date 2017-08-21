@@ -5,6 +5,9 @@ date: "August 20, 2017"
 output: html_document
 ---
 
+Reproducible Research Project 1
+===============================
+
 It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the "quantified self" movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.
 
 This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
@@ -12,7 +15,8 @@ This assignment makes use of data from a personal activity monitoring device. Th
 Loading and preprocessing the data
 ====================================
 
-##Downloading and unzipping file
+Downloading and unzipping file
+===============================
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -24,7 +28,9 @@ download.file (fileurl1, dest1)
 unzip(zipfile="./data/dataset.zip",exdir="./data")
 setwd("/Users/Galka/Downloads/Coursera/Reproducible Research/Week2/data")
 ```
+
 Read .csv file
+
 ```{r read}
 activity <- read.csv("activity.csv", header = TRUE, sep = ",", dec =".", fill = TRUE, 	    na.strings = "NA")
 head(activity)
@@ -33,36 +39,43 @@ head(activity)
 What is mean total number of steps taken per day?
 ====================================================
 
-##Calculating the total number of steps taken per day
+Calculating the total number of steps taken per day
+=====================================================
 
 ```{r totalstepsperday}
 StepsPerDay <- aggregate (steps ~ date, activity, sum, na.action=na.omit)
 head(StepsPerDay)
 ```
 
-##Creating Histogram of the total number of steps taken each day
+Creating Histogram of the total number of steps taken each day
+===============================================================
 
 ```{r histogramtspd}
 hist (StepsPerDay$steps, main="Total number of steps taken each day",
       xlab="Number of Steps")
 ```
 
-##Calculating and reporting the mean and median of the total number of steps taken per day
+Calculating and reporting the mean and median of the total number of steps taken per day
+========================================================================================
 
 ```{r meanmedianspd}
 spdmean <- mean(StepsPerDay$steps)
 spdmedian <- median(StepsPerDay$steps)
 ```
-##`r spdmean` 
+
+`r spdmean` 
+===========
 is the mean of the total number of steps per day
 
-##`r spdmedian` 
+`r spdmedian`
+
 is the median of the total number of steps per day
 
 What is the average daily activity pattern?
 ============================================
 
-##Time series plot of the average number of steps taken
+Time series plot of the average number of steps taken
+=====================================================
 
 ```{r averagesteps}
 StepsPerInterval <- aggregate( steps ~ interval, activity, mean)
@@ -70,22 +83,24 @@ head(StepsPerInterval)
 plot(StepsPerInterval$interval,StepsPerInterval$steps, type="l", xlab="Interval", ylab="Number of Steps",main="Average Daily Activity Pattern")
 ```
 
-##Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
-
+Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+======================================================================================
 ```{r maxinterval}
 MaxInt <- StepsPerInterval[which.max(StepsPerInterval$steps),1]
 ```
 
 Interval
 
-##`r MaxInt`
+`r MaxInt`
+==========
 
 Imputing missing values
 ================================
 
 There are a number of days/intervals where there are missing values (coded as NA). The presence of missing days may introduce bias into some calculations or summaries of the data.
 
-##Calculate and report the total number of missing values in the dataset
+Calculate and report the total number of missing values in the dataset
+======================================================================
 
 ```{r missingvaluesnumber}
 nmv <- length(which(is.na(activity$steps)))
@@ -93,7 +108,8 @@ nmv <- length(which(is.na(activity$steps)))
 
 There are 
 
-##`r nmv` 
+`r nmv` 
+=======
 values missing
 
 For filling in all of the missing values in the dataset I decided to use the mean for that 5-minute interval. I will create new dataset that is equal to the original dataset but with the missing data filled in:
@@ -120,16 +136,22 @@ diffspdmedian <- newspdmedian - spdmedian
 ```
 New dataset mean
 
-##`r newspdmean`
+`r newspdmean`
+===============
+
 New dataset median
 
-##`r newspdmedian`
+`r newspdmedian`
+=================
+
 Difference between new mean and old mean
 
-##`r diffspdmean`
+`r diffspdmean`
+===============
 Difference between new median and old median
 
-##`r diffspdmedian`
+`r diffspdmedian`
+=====================
 
 What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
