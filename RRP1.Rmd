@@ -2,7 +2,7 @@
 title: "Reproducible Research Project 1"
 author: "Galina Chtcherbakova"
 date: "August 20, 2017"
-output: html_document
+output: html_document 
 ---
 
 Reproducible Research Project 1
@@ -15,8 +15,8 @@ This assignment makes use of data from a personal activity monitoring device. Th
 Loading and preprocessing the data
 ====================================
 
-Downloading and unzipping file
-===============================
+Downloading and unzipping file 
+================================
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
