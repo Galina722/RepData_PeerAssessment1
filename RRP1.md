@@ -182,4 +182,5 @@ ggplot(WeekendWeekdayActivity, aes(x = interval, y=steps, color=weekend)) +
        geom_line() +  facet_grid(weekend ~ .) +
        labs(title = "Average Number of Steps By Interval", x = "interval", y = "steps")
 ```
-
+## URL to my report and plots
+[URL:] (http://htmlpreview.github.io/?https://github.com/Galina722/RepData_PeerAssessment1/master/RRP1.html)
